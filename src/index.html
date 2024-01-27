@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/xterm@5.3.0/css/xterm.css" />
+    <style type="text/css">
+      h1 {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+      }
+      div#irb {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>irb demo</h1>
+    <p>powered by <a href="https://github.com/ruby/ruby.wasm">ruby-wasm-emscripten</a> + <a href="https://xterm-pty.netlify.app/">xterm-pty</a></p>
+    <p>Status: <span id="status">not ready</span></p>
+    <div id="irb">
+      <div id="terminal"></div>
+    </div>
+    <p><a href="https://github.com/mame/emirb">Source code</a></p>
+  </body>
+  <script src="./index.js"></script>
+</html>
