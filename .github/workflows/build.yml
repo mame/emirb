@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.0
 
       - name: Setup emsdk
         run: |
@@ -16,6 +22,7 @@ jobs:
           cd emsdk
           ./emsdk install ${{ matrix.emscripten_version }}
           ./emsdk activate ${{ matrix.emscripten_version }}
+          ./emsdk construct_env
 
       - name: Build ruby
         run: |
@@ -24,7 +31,7 @@ jobs:
           cd ruby.wasm
           ./bin/setup
           bundle exec rake compile
-          RUBY_WASM_ADDITIONAL_EXTS=io/console,io/wait RUBY_WASM_EMCC_LDFLAGS="-sASYNCIFY --js-library $DIR/node_modules/xterm-pty/emscripten-pty.js" bundle exec rake npm:ruby-head-wasm-emscripten:build
+          RUBY_WASM_ADDITIONAL_EXTS=io/console,io/wait RUBY_WASM_EMCC_LDFLAGS="-sASYNCIFY --js-library ${{ github.workspace }}/node_modules/xterm-pty/emscripten-pty.js" bundle exec rake npm:ruby-head-wasm-emscripten:build || find . -name config.log
 
       - name: Build site
         run: |
