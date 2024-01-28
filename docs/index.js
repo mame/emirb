@@ -705,7 +705,7 @@
 	xterm.loadAddon(master);
 
 	const main = async () => {
-	  const args = ["--disable-gems", "-e", "GC.disable; require 'irb'; IRB.start(__FILE__)"];
+	  const args = ["--disable-gems", "-e", "GC.disable; require 'irb'; IRB.setup(nil, argv: ['--no-pager']); IRB::Irb.new.run"];
 	  console.log(`$ ruby.wasm ${args.join(" ")}`);
 	  const defaultModule = {
 	    locateFile: (path) => "./ruby-wasm-emscripten-dist/" + path,
