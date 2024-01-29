@@ -12,7 +12,7 @@ const { master, slave } = openpty();
 xterm.loadAddon(master);
 
 const main = async () => {
-  const args = ["--disable-gems", "-e", "GC.disable; require 'irb'; IRB.setup(nil, argv: ['--no-pager']); IRB::Irb.new.run"];
+  const args = ["--disable-gems", "-e", "require 'irb'; IRB.setup(nil, argv: ['--no-pager']); IRB::Irb.new.run"];
   console.log(`$ ruby.wasm ${args.join(" ")}`);
   const defaultModule = {
     locateFile: (path) => "./ruby-wasm-emscripten-dist/" + path,
