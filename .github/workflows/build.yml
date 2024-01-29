@@ -27,13 +27,7 @@ jobs:
       - name: Build irb
         run: |
           source emsdk/emsdk_env.sh
-          npm install
-          cd ruby.wasm
-          ./bin/setup
-          bundle exec rake compile
-          RUBY_WASM_ADDITIONAL_EXTS=io/console,io/wait RUBY_WASM_EMCC_LDFLAGS="-sASYNCIFY --js-library ${{ github.workspace }}/node_modules/xterm-pty/emscripten-pty.js" bundle exec rake npm:ruby-head-wasm-emscripten:build || find . -name config.log
-          cd ..
-          npm run build
+          ./build.sh
 
       - if: matrix.platforms.emscripten_version != 'latest'
         name: Upload Pages artifact
