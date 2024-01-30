@@ -12,7 +12,7 @@ cd ruby.wasm
 
 ./bin/setup
 bundle exec rake compile
-RUBY_WASM_ADDITIONAL_EXTS=io/console,io/wait RUBY_WASM_EMCC_LDFLAGS="-sASYNCIFY -sASYNCIFY_STACK_SIZE=524288 --js-library $DIR/emscripten-pty.js" bundle exec rake npm:ruby-head-wasm-emscripten:build
+RUBY_WASM_ADDITIONAL_EXTS=io/console,io/wait RUBY_WASM_EMCC_LDFLAGS="-sASYNCIFY -sASYNCIFY_STACK_SIZE=524288 --js-library $DIR/emscripten-pty.js" INSTRUBY_OPTS=--exclude=bundled-gems bundle exec rake npm:ruby-head-wasm-emscripten:build
 
 cd $DIR
 
