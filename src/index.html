@@ -3,41 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>irb demo - powered by ruby-wasm-emscripten + xterm-pty</title>
-    <meta name="description" content="irb demo - powered by ruby-wasm-emscripten + xterm-pty" />
+    <title>emirb - irb on ruby-wasm-emscripten + xterm-pty</title>
+    <meta name="description" content="irb on ruby-wasm-emscripten + xterm-pty" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="irb demo - powered by ruby-wasm-emscripten + xterm-pty" />
+    <meta property="og:title" content="emirb" />
     <meta property="og:url" content="https://mame.github.io/emirb/" />
-    <meta property="og:description" content="irb demo - powered by ruby-wasm-emscripten + xterm-pty" />
-    <meta property="og:site_name" content="irb demo" />
+    <meta property="og:description" content="irb on ruby-wasm-emscripten + xterm-pty" />
+    <meta property="og:site_name" content="emirb" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@mametter" />
     <meta name="twitter:creator" content="@mametter" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-TileColor" content="#ce0000" />
-    <meta name="theme-color" content="#ce0000" />
-    <link rel="stylesheet" href="https://unpkg.com/xterm@5.3.0/css/xterm.css" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="xterm.css" />
     <style type="text/css">
-      h1 {
-        text-align: center;
+      html, body {
+        height: 100%;
+        margin: 0;
+        background-color: #000000;
+        overflow: hidden;
       }
-      p {
-        text-align: center;
-      }
-      div#irb {
-        display: flex;
-        justify-content: center;
+      div#terminal {
+        height: 100%;
       }
     </style>
   </head>
   <body>
-    <h1>irb demo</h1>
-    <p>powered by <a href="https://github.com/ruby/ruby.wasm">ruby-wasm-emscripten</a> + <a href="https://xterm-pty.netlify.app/">xterm-pty</a></p>
-    <p>Status: <span id="status">not ready</span></p>
-    <div id="irb">
-      <div id="terminal"></div>
-    </div>
-    <p><a href="https://github.com/mame/emirb">Source code</a></p>
+    <div id="terminal"></div>
   </body>
   <script src="./index.js"></script>
 </html>
