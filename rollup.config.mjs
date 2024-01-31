@@ -15,6 +15,7 @@ export default {
     copy({
       targets: [
         { src: "src/index.html", dest: "docs/" },
+        { src: "node_modules/xterm/css/xterm.css", dest: "docs/" },
         { src: "node_modules/ruby-wasm-emscripten/dist/**/*", dest: "docs/ruby-wasm-emscripten-dist" },
       ]
     }),
