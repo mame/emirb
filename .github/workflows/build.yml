@@ -3,10 +3,8 @@ on: [push, pull_request]
 
 jobs:
   build:
-    strategy:
-      matrix:
-        emscripten_version: ['3.1.52', latest]
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,8 +18,8 @@ jobs:
         run: |
           git clone https://github.com/emscripten-core/emsdk
           cd emsdk
-          ./emsdk install ${{ matrix.emscripten_version }}
-          ./emsdk activate ${{ matrix.emscripten_version }}
+          ./emsdk install latest
+          ./emsdk activate latest
           ./emsdk construct_env
 
       - name: Build irb
@@ -29,23 +27,12 @@ jobs:
           source emsdk/emsdk_env.sh
           ./build.sh
 
-      - if: matrix.platforms.emscripten_version != 'latest'
-        name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Publish
+        uses: cloudflare/pages-action@v1.5.0
         with:
-          path: docs
-
-  deploy:
-    if: github.event_name == 'push'
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-      actions: read
-    environment:
-      name: github-pages
-      url: https://mame.github.io/emirb/
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v3
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: irb-ruby-uy
+          directory: docs
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: '3'
